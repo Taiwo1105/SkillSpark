@@ -15,8 +15,8 @@ SkillSpark is an online learning platform offering high-quality courses to help 
 
 ### **1. Clone the Repository**  
 ```bash
-git clone https://github.com/yourusername/skillspark.git
-cd skillspark
+git clone https://github.com/Taiwo1105/SkillSpark.git
+cd SkillSpark
 
 Set Up a Virtual Environment
 
