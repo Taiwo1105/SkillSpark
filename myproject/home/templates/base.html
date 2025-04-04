@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>{% block title %}Skill Spark{% endblock %}</title>
+       <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/owl.css' %}">
+        <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+     <!-- Page-Specific Styles -->
+     {% block extra_css %}{% endblock %}
+     
+    </head>
+<body>
+       <!-- ✅ Navbar Block -->
+       <header class="header fixed-top bg-white shadow">
+        <div class="container">
+            <nav class="main-nav py-3">  <!-- Added padding for space -->
+                <a href="/" class="logo"><h2>SKILL SPARK</h2></a>
+                <ul class="nav-links">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="{% url 'courses' %}">COURSES</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'dashboard' %}">DASHBOARD</a></li>
+                        <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">LOGIN</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    {% if user.is_authenticated %}
+    <h3>Welcome, <b> {{ user.username|upper  }} </b></h3>
+   
+{% else %}
+      <!--<a href="{% url 'login' %}">Login</a> | <a href="{% url 'register' %}">Register</a> -->
+{% endif %}
+
+
+    <!-- ✅ Dynamic Content (Changes per page) -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+
+
+
+
+ <!-- ✅ Load jQuery First -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+ <!-- ✅ Corrected JS Paths for Django -->
+ <script src="{% static 'js/bootstrap.min.js' %}"></script>
+ <script src="{% static 'js/custom.js' %}"></script>
+ <script src="{% static 'js/counter.js' %}"></script>
+ <script src="{% static 'js/owl-carousel.js' %}"></script>
+ <script src="{% static 'js/isotope.min.js' %}"></script>
+ 
+<!--   
+ <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p class="mb-2">&copy; 2025 Skill Spark Organization. All rights reserved.</p>
+        <div class="d-flex justify-content-center">
+          <p>Follow us:</p>
+    <a href="https://facebook.com" target="_blank">Facebook</a> |
+    <a href="https://wa.me/+250791375197" target="_blank">WhatsApp</a> |
+    <a href="https://instagram.com" target="_blank">Instagram</a>
+        </div>
+    </div>
+</footer>
+-->
+</body>
+</html>
+
+
+
+    

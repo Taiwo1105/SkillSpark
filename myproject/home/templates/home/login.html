@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Skill Spark</title>
+
+    <!-- ✅ Centralized CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+</head>
+<body>
+
+    <!-- ***** Navbar Start ***** -->
+    <header class="header">
+        <div class="container">
+            <nav class="main-nav">
+                <a href="/" class="logo"><h2>SKILL SPARK</h2></a>
+                <ul class="nav-links">
+                    <li><a href="/">HOME</a></li>
+                    
+                    <li><a href="/courses">COURSES</a></li>
+                    <li><a href="/#team">TEAM</a></li>
+                    <li><a href="/#events">EVENTS</a></li>
+                    <!--<li><a href="/register">REGISTER</a></li>
+                     <li><a href="/login" class="active">SIGN IN</a></li>-->
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- ***** Navbar End ***** -->
+
+    <div class="form-container">
+        <h2>Login to Skill Spark</h2>
+
+        {% if form.non_field_errors %}
+            <p class="error-message">{{ form.non_field_errors }}</p>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Render Django form fields properly -->
+            <div>
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+            
+            <div style="position: left;">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+                <span class="toggle-password" onclick="togglePassword()" 
+                    style="position: absolute; right: 0px; top: 88%; left: 250px; transform: translateY(-50%); cursor: pointer;font-size: 16px; user-select: none;">
+                    👁️
+                </span>
+            </div>
+
+            <button type="submit"><b>Login</b></button>
+        </form>
+
+        <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+        <p><a href="{% url 'forgot_password' %}">Forgot password?</a></p>
+    </div>
+
+    <!-- ✅ Load jQuery First -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- ✅ Corrected JS Paths for Django -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/counter.js' %}"></script>
+    <script src="{% static 'js/owl-carousel.js' %}"></script>
+    <script src="{% static 'js/isotope.min.js' %}"></script>
+
+    <!-- ✅ Password Toggle Script -->
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("id_password");
+            var toggleIcon = document.querySelector(".toggle-password");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text"; 
+                toggleIcon.textContent = "🙈"; // Change to closed-eye
+            } else {
+                passwordField.type = "password";
+                toggleIcon.textContent = "👁️"; // Change back to open-eye
+            }
+        }
+    </script>
+
+</body>
+</html>
+{% endblock %}

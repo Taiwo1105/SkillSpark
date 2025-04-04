@@ -1,0 +1,193 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".menu-toggle").click(function () {
+                $(".nav-links").toggleClass("active");
+            });
+        });
+    </script>
+    <style>
+        /* Responsive Navbar Toggle */
+
+      /* Navbar Styling */
+      .header {
+            background: #6A5ACD;
+            padding: 10px 0;
+            position: fixed; /* Keeps it at the top */
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: 0.3s ease-in-out;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 10px;
+            border-radius: 5px;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            background: white;
+            color: #6A5ACD;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        /* Responsive Navbar */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background: #6A5ACD;
+                padding: 10px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url("{% static 'home/images/banner-item-01.jpg' %}") center/cover no-repeat;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        /* About Us Section */
+        .about-section {
+            padding: 50px 20px;
+            text-align: center;
+            background: #fff;
+        }
+
+        .about-section h2 {
+            font-size: 36px;
+            color: #6A5ACD;
+        }
+
+        .about-section p {
+            font-size: 18px;
+            color: #333;
+            max-width: 800px;
+            margin: auto;
+            line-height: 1.6;
+        }
+  
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container main-nav">
+            <a href="#" class="logo"><h2>SKILL SPARK</h2></a>
+            <span class="menu-toggle">☰</span>
+            <ul class="nav-links">
+                <li><a href="#" class="active">HOME</a></li>
+                <li class="scroll-to-section"><a href="#about"><b>ABOUT</b></a></li>
+                <li><a href="/courses">COURSES</a></li>
+                    <li><a href="register"><b>REGISTER</b></a></li>
+                
+            </ul>
+        </div>
+    </header>
+    
+     <!-- Hero Section -->
+     <section class="hero">
+      <h1>Welcome to Skill Spark</h1>
+  </section>
+
+  <!-- About Us Section -->
+  <section class="about-section">
+      <h2>About Us</h2>
+      <p>
+          Skill Spark is an innovative educational platform that empowers learners with high-quality courses in various fields. 
+          Whether you are looking to upskill, learn something new, or advance your career, we provide well-structured courses to help you achieve your goals.
+          Our platform offers a blend of video lessons, interactive content, and downloadable materials, making learning accessible for everyone.
+      </p>
+  </section>
+
+
+    <!-- ✅ Load jQuery First -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+ <!-- ✅ Corrected JS Paths for Django -->
+  
+ <script src="{% static 'js/bootstrap.min.js' %}"></script>
+ <script src="{% static 'js/custom.js' %}"></script>
+ <script src="{% static 'js/counter.js' %}"></script>
+ <script src="{% static 'js/owl-carousel.js' %}"></script>
+ <script src="{% static 'js/isotope.min.js' %}"></script>
+ 
+ 
+
+</body>
+</html>

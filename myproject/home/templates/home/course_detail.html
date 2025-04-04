@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">  <!-- Add margin-top to create space below navbar -->
+    <h2 class="mt-4">{{ course.title }}</h2>
+    <p>{{ course.description }}</p>
+    <p>Duration: {{ course.duration }}</p>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-primary">Start Course Here</a>
+</div>
+{% endblock %}

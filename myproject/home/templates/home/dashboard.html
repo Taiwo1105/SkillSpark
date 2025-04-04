@@ -1,0 +1,105 @@
+
+{% extends 'base.html' %}
+{% load static %}
+<title>{% block title %}Dashboard - Skill Spark{% endblock %}</title>
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block navbar %}
+       <!-- ✅ Navigation Bar -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <h1>Skill Spark</h1>
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <header class="header">
+                            <div class="container">
+                                <nav class="main-nav">
+                                    <a href="/" class="logo"><h2>SKILL SPARK</h2></a>
+                                    <ul class="nav-links">
+                                       <!--   <li><a href="/">HOME</a></li>
+                                      
+                                        <li><a href="/dashboard" class="active">DASHBOARD</a></li>
+                                        <li><a href="/logout">LOGOUT</a></li>
+                                    -->
+                                    </ul>
+                                </nav>
+                            </div>
+                        </header>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% endblock %}
+    <!-- ✅ Dashboard Section -->
+
+    {% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center">Start Course</h2>
+    
+        {% if enrolled_courses %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Progress</th>
+                    <th>Materials</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for enrollment in enrolled_courses %}
+                <tr>
+                    <td>{{ enrollment.course.title }}</td>
+                    <td>
+                        <p>Progress = {{ enrollment.progress }}</p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 50%;" 
+                            aria-valuenow="{{ enrollment.progress }}" aria-valuemin="0" aria-valuemax="100">
+                                {{ enrollment.progress }}%
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                    
+                            <a href="https://docs.google.com/document/d/1zJV-Eo0G26mmuX9PHoU2xgjNLqtFI84A/edit?usp=drivesdk&ouid=107947022637230158139&rtpof=true&sd=true" 
+                               class="btn btn-primary" target="_blank">
+                               View Course Material
+                            </a>
+
+
+                            <a href="https://docs.google.com/document/d/1zL7K4zVFfLsk0JygP7_rL41i29Z1IWLO/edit?usp=drivesdk&ouid=107947022637230158139&rtpof=true&sd=true" 
+                            class="btn btn-primary" target="_blank">
+                            View Course Material
+                         </a>
+                        </td>
+
+                       
+                        </td>
+                    </tr>
+                  
+                        
+                    <!--
+                    
+                    <td>
+                        <a href="{% url 'generate_certificate' enrollment.course.id %}" class="btn btn-success">Download Certificate</a>
+                    </td>
+                    -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-center">You are not enrolled in any courses yet.</p>
+        {% endif %}
+    </div>
+    {% endblock %}
+ 

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+<title>{% block title %}Course - Skill Spark{% endblock %}</title>
+
+
+{% block content %}
+<div class="container pt-5" style="margin-top: 50px;">  <!-- Creates spacing -->
+    <h2 class="text-center mb-4"><u><center>Available Courses</center></u></h2>
+
+
+    {% if courses %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped shadow-sm">
+            <thead class="bg-primary text-white text-center">
+                <tr>
+                    
+                    <th style="width: 10%; padding: 10px;">COURSE</th>
+                    <th style="width: 10%; padding: 10px;">TITLE</th>
+                    <th style="width: 40%; padding: 10px;">DESCRIPTION</th>
+                    <th style="width: 3%; padding: 10px;">PRICE</th>
+                    <th style="width: 10%; padding: 10px;">DURATION</th>
+                    <th style="width: 10%; padding: 10px;">ACTION</th>
+
+                    <td class="align-middle text-center">
+                        {% if course.material %}
+                            {% if course.material.url|slice:"-4:" == ".mp4" %}
+                                <video width="200" height="150" controls>
+                                    <source src="{{ course.material.url }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            {% else %}
+                                <a href="{{ course.material.url }}" class="btn btn-sm btn-success" download>Download PDF</a>
+                            {% endif %}
+                        
+                        {% endif %}
+                    </td>
+                    
+                </tr>
+                
+            </thead>
+    
+            <tbody>
+                {% for course in courses %}
+                <tr class="bg-light">
+                    <td class="text-center">
+                         <!-- Course Image -->
+                {% if course.image %}
+                <td>
+                    <img src="{{ course.image.url }}" class="img-fluid rounded course-img" alt="{{ course.title }}">
+                </td>
+               
+                {% else %}
+                <!-- Assign unique default images based on course title -->
+                {% if "Web Development" in course.title %}
+                <img src="{% static 'images/course_webnew.jpg' %}" class="card-img-top" alt="web Course">
+                {% elif "Digital Content" in course.title %}
+                <img src="{% static 'images/copywritingnew.png' %}" class="card-img-top" alt="Digital">
+                {% elif "Data Analysis" in course.title %}
+                <img src="{% static 'images/data_analysisnew.jpg' %}" class="card-img-top" alt="dataAnalysis">
+                {% elif "Microsoft Packages" in course.title %}
+                <img src="{% static 'images/microsoft_Pnew.png' %}" class="card-img-top" alt="Microsoft">
+                {% else %}
+                <img src="{% static 'images/event-03.jpg' %}" class="card-img-top" alt="default">
+                {% endif %}
+                {% endif %}
+                    </td>
+                    <td class="align-middle"><strong>{{ course.title }}</strong></td>
+                    <td class="align-middle">{{ course.description }}</td>
+                    <td class="align-middle"><strong>${{ course.price }}</strong></td>
+                    <td class="align-middle">{{ course.duration }}</td>
+                    <td class="align-middle text-center">
+                     
+                <!--
+                        This ensures only logged-in users can access the dashboard
+                        If they are not logged in, they must register first..-->
+                       {% if user.is_authenticated %}
+                       <a href="{% url 'dashboard' %}" class="btn btn-primary">Enroll</a>
+                   {% else %}
+                       <a href="{% url 'register' %}" class="btn btn-primary">Enroll</a>
+                   {% endif %}
+                   
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p class="text-center">No courses available at the moment.</p>
+    {% endif %}
+
+</div>
+{% endblock %}
